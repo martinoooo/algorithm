@@ -18,6 +18,7 @@ function selection(arr) {
         arr[i] = arr[minIndex];
         arr[minIndex] = temp;
     }
+    return arr;
 }
 
 var arr = [3,2,1,5,3];
