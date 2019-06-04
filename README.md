@@ -10,3 +10,8 @@
   - [快速排序](https://github.com/martinoooo/algorithm/blob/master/sort/quick.js)
   - [堆排序](https://github.com/martinoooo/algorithm/blob/master/sort/heap.js)
   - [计数排序](https://github.com/martinoooo/algorithm/blob/master/sort/count.js)
+  - [桶排序](https://github.com/martinoooo/algorithm/blob/master/sort/bucket.js)
+  - [基数排序](https://github.com/martinoooo/algorithm/blob/master/sort/radix.js)
+
+- 搜索算法
+  - [二分搜索](https://github.com/martinoooo/algorithm/blob/master/search/binarySearch.js)
