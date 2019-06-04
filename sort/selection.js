@@ -6,7 +6,7 @@
 // 时间复杂度 n^2
 function selection(arr) {
     const length = arr.length;
-    let minIndex, temp;
+    let minIndex;
     for (let i = 0; i < length - 1; i++) {
         minIndex = i;
         for (let j = i + 1; j < length; j++) {
@@ -14,11 +14,15 @@ function selection(arr) {
                 minIndex = j;            
             }
         }
-        temp = arr[i];
-        arr[i] = arr[minIndex];
-        arr[minIndex] = temp;
+        swap(i, minIndex)
     }
     return arr;
+
+    function swap(i, j) {
+        const temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
 }
 
 var arr = [3,2,1,5,3];
