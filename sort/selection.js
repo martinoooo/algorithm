@@ -5,26 +5,28 @@
 
 // 时间复杂度 n^2
 function selection(arr) {
-    const length = arr.length;
-    let minIndex;
-    for (let i = 0; i < length - 1; i++) {
-        minIndex = i;
-        for (let j = i + 1; j < length; j++) {
-            if (arr[j] < arr[minIndex]) {   
-                minIndex = j;            
-            }
-        }
-        swap(i, minIndex)
+  const length = arr.length;
+  let minIndex;
+  for (let i = 0; i < length - 1; i++) {
+    minIndex = i;
+    for (let j = i + 1; j < length; j++) {
+      if (arr[j] < arr[minIndex]) {
+        minIndex = j;
+      }
     }
-    return arr;
+    if (i !== minIndex) {
+      swap(i, minIndex);
+    }
+  }
+  return arr;
 
-    function swap(i, j) {
-        const temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
-    }
+  function swap(i, j) {
+    const temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
+  }
 }
 
-var arr = [3,2,1,5,3];
+var arr = [3, 2, 1, 5, 3];
 selection(arr);
 console.log(arr);

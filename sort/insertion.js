@@ -4,19 +4,20 @@
 
 // 时间复杂度 n^2
 function insertion(arr) {
-    const length = arr.length;
-    for (let i = 1; i < length; i++) {
-        for (let j = 0; j < i; j++) {
-            if (arr[i] < arr[j]) {
-                arr.splice(j, 0, arr[i]);
-                arr.splice(i + 1, 1);
-                break;
-            }
-        }
+  const length = arr.length;
+  for (let i = 1; i < length; i++) {
+    const temp = arr[i];
+    let preIndex = i - 1;
+
+    while (arr[preIndex] > temp) {
+      arr[preIndex + 1] = arr[preIndex];
+      preIndex -= 1;
     }
-    return arr;
+    arr[preIndex + 1] = temp;
+  }
+  return arr;
 }
 
-var arr = [3,2,1,5,3];
+var arr = [3, 2, 1, 5, 3];
 insertion(arr);
 console.log(arr);
