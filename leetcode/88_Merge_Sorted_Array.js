@@ -43,6 +43,7 @@ merge(a, 1, [5, 5, 5, 5, 5], 5);
 console.log(a);
 
 // bset code
+// 从后往前比较，并从后往前插入
 /**
  * @param {number[]} nums1
  * @param {number} m
