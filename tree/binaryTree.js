@@ -33,16 +33,33 @@ function BinaryTree() {
   };
 
   /* 遍历 */
+  // 深度遍历（Depth-First Search，DFS）
   // 前序遍历 ---> 先输出节点的值，再递归遍历左右子树
   // 复制一个已有的二叉树结构，性能是最高的
   this.preOrderTraverse = function(callback) {
     preOrderTraverse(this.oRoot, callback);
+    preOrderTraverse2(this.oRoot, callback);
 
+    // 递归
     function preOrderTraverse(node, callback) {
       if (node) {
         callback(node.key);
         preOrderTraverse(node.left, callback);
         preOrderTraverse(node.right, callback);
+      }
+    }
+
+    // 非递归
+    function preOrderTraverse2(nodes, callback) {
+      let result = [];
+      let stack = [];
+      stack.push(nodes);
+      // 直到栈中的数据为空
+      while (stack.length) {
+        let node = stack.pop(); // 取的是栈中最后一个
+        callback(node.key);
+        if (node.right) stack.push(node.right); // 先压入右子树
+        if (node.left) stack.push(node.left); // 后压入左子树
       }
     }
   };
@@ -70,6 +87,39 @@ function BinaryTree() {
         postOrderTraverse(node.right, callback);
         callback(node.key);
       }
+    }
+  };
+
+  // 广度遍历（Breadth-First Search， BFS）
+  this.BFS = function(callback) {
+    let stack = [this.oRoot]; // 先将要遍历的树压入栈
+    let count = 0; // 用来记录执行到第一层
+    bfs();
+    bfs2(this.oRoot);
+
+    function bfs() {
+      let node = stack[count];
+      if (node) {
+        callback(node.key);
+        if (node.left) stack.push(node.left);
+        if (node.right) stack.push(node.right);
+        count++;
+        bfs();
+      }
+    }
+
+    function bfs2(node) {
+      let result = [];
+      let queue = [];
+      queue.push(node);
+      let pointer = 0;
+      while (pointer < queue.length) {
+        let node = queue[pointer++]; // 这里不使用 shift 方法（复杂度高），用一个指针代替; 取出一个值之后，pointer加1
+        callback(node.key);
+        node.left && queue.push(node.left);
+        node.right && queue.push(node.right);
+      }
+      return result;
     }
   };
 
@@ -163,4 +213,4 @@ var binaryTree = new BinaryTree();
 nodeArr.forEach(function(key) {
   binaryTree.insert(key);
 });
-console.log(binaryTree.removeNode(3));
+binaryTree.BFS(console.log);
