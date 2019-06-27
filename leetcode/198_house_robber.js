@@ -20,6 +20,8 @@
                     Total amount you can rob = 2 + 9 + 1 = 12.
  */
 
+// wrong
+// [2,1,1,2]
 /**
  * @param {number[]} nums
  * @return {number}
