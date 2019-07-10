@@ -23,14 +23,40 @@
 */
 
 /**
- * @param {number} a
- * @param {number} b
- * @return {number}
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
  */
-var getSum = function(a, b) {
-  if (a === 0) return b;
+function helper(root, acc, target, hashmap) {
+  // see also : https://leetcode.com/problems/subarray-sum-equals-k/
 
-  if (b === 0) return a;
+  if (root === null) return 0;
+  let count = 0;
+  acc += root.val;
+  if (acc === target) count++;
+  if (hashmap[acc - target] !== void 0) {
+    count += hashmap[acc - target];
+  }
+  if (hashmap[acc] === void 0) {
+    hashmap[acc] = 1;
+  } else {
+    hashmap[acc] += 1;
+  }
+  const res =
+    count +
+    helper(root.left, acc, target, hashmap) +
+    helper(root.right, acc, target, hashmap);
 
-  return getSum(a ^ b, (a & b) << 1);
+  // 这里要注意别忘记了
+  hashmap[acc] = hashmap[acc] - 1;
+
+  return res;
+}
+
+var pathSum = function(root, sum) {
+  // 时间复杂度和空间复杂度都是O(n)
+  const hashmap = {};
+  return helper(root, 0, sum, hashmap);
 };
