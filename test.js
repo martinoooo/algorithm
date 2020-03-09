@@ -1,29 +1,13 @@
-var mergeSort = function(nums) {
-  if (nums.length < 2) return nums;
+function binarySearch(arr, val) {
+  let low = 0;
+  let high = arr.length - 1;
 
-  const mid = Math.floor(nums.length / 2);
-  const left = nums.splice(0, mid);
-  const right = nums;
-
-  return merge(mergeSort(left), mergeSort(right));
-};
-
-function merge(left, right) {
-  const result = [];
-
-  while (left.length > 0 && right.length > 0) {
-    if (left[0] < right[0]) {
-      result.push(left.shift());
-    } else {
-      result.push(right.shift());
+  while(low >= high) {
+    if (arr[high] > val) {
+      high
     }
   }
+}
 
-  return result.concat(left, right);
-}
-function swap(nums, i, j) {
-  const temp = nums[i];
-  nums[i] = nums[j];
-  nums[j] = temp;
-}
-console.log(mergeSort([3, 4, 1, 5, 8, 2, 4]));
+var arr = [1, 3, 5, 7, 9, 10, 11, 12, 14, 15, 19, 20];
+console.log(binarySearch(arr, 14));
