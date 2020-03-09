@@ -27,21 +27,20 @@ var maxSubArray = function(nums) {
     const rightSum = helper(nums, mid + 1, right); // 要么在右侧
     const crossSum = crossSumHelper(nums, left, right, mid); // 要么跨中心
 
-    console.log(Math.max(Math.max(leftSum, rightSum), crossSum));
     return Math.max(Math.max(leftSum, rightSum), crossSum);
   }
 
   function crossSumHelper(nums, left, right, p) {
     if (left == right) return nums[left];
 
-    let leftSubsum = Number.MIN_VALUE;
+    let leftSubsum = Number.MIN_SAFE_INTEGER;
     let currSum = 0;
     for (let i = p; i > left - 1; --i) {
       currSum += nums[i];
       leftSubsum = Math.max(leftSubsum, currSum);
     }
 
-    let rightSubsum = Number.MIN_VALUE;
+    let rightSubsum = Number.MIN_SAFE_INTEGER;
     currSum = 0;
     for (let i = p + 1; i < right + 1; ++i) {
       currSum += nums[i];
@@ -52,3 +51,4 @@ var maxSubArray = function(nums) {
 };
 
 console.log(maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]));
+console.log(maxSubArray([-2, -1]));
