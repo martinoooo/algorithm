@@ -36,7 +36,7 @@
  * @param {number[]} nums
  * @return {number}
  */
-var removeDuplicates = function(nums) {
+var removeDuplicates = function (nums) {
   const len = nums.length;
   for (let i = 1; i < len; i++) {
     if (nums[i] === undefined) {
@@ -62,7 +62,7 @@ var removeDuplicates = function(nums) {
  * @param {number[]} nums
  * @return {number}
  */
-var removeDuplicates2 = function(nums) {
+var removeDuplicates2 = function (nums) {
   let cur = 0;
   for (let next = 0, len = nums.length; next < len; next++) {
     if (nums[cur] !== nums[next]) {

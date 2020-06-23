@@ -7,7 +7,7 @@ function Node(key) {
 function BinaryTree() {
   this.oRoot = null;
   // 插入
-  this.insert = function(key) {
+  this.insert = function (key) {
     var newNode = new Node(key);
     if (!(this.oRoot === null)) {
       insertNode(this.oRoot, newNode);
@@ -36,7 +36,7 @@ function BinaryTree() {
   // 深度遍历（Depth-First Search，DFS）
   // 前序遍历 ---> 先输出节点的值，再递归遍历左右子树
   // 复制一个已有的二叉树结构，性能是最高的
-  this.preOrderTraverse = function(callback) {
+  this.preOrderTraverse = function (callback) {
     preOrderTraverse(this.oRoot, callback);
     preOrderTraverse2(this.oRoot, callback);
 
@@ -65,7 +65,7 @@ function BinaryTree() {
   };
   // 中序遍历 ---> 先递归遍历左子树, 再输出节点的值，
   // 用于排序一个数组，从小到大升序排
-  this.inOrderTraverse = function(callback) {
+  this.inOrderTraverse = function (callback) {
     inOrderTraverseNode(this.oRoot, callback);
 
     function inOrderTraverseNode(node, callback) {
@@ -78,7 +78,7 @@ function BinaryTree() {
   };
   // 后续遍历 ---> 先递归遍历右子树，再递归遍历左子树, 再输出节点的值
   // 用于操作系统和文件系统的遍历上
-  this.postOrderTraverse = function(callback) {
+  this.postOrderTraverse = function (callback) {
     postOrderTraverse(this.oRoot, callback);
 
     function postOrderTraverse(node, callback) {
@@ -91,7 +91,7 @@ function BinaryTree() {
   };
 
   // 广度遍历（Breadth-First Search， BFS）
-  this.BFS = function(callback) {
+  this.BFS = function (callback) {
     let stack = [this.oRoot]; // 先将要遍历的树压入栈
     let count = 0; // 用来记录执行到第一层
     bfs();
@@ -146,7 +146,7 @@ function BinaryTree() {
     return null;
   };
   // 查找特定值
-  this.findNode = key => {
+  this.findNode = (key) => {
     return searchNode(this.oRoot, key);
 
     function searchNode(node, key) {
@@ -164,7 +164,7 @@ function BinaryTree() {
   };
 
   /* 删除 */
-  this.removeNode = key => {
+  this.removeNode = (key) => {
     const removeNode = (node, key) => {
       if (node === null) {
         return null;
@@ -210,7 +210,9 @@ var nodeArr = [8, 3, 10, 1, 6, 14, 4, 7, 13];
 //        4  7  13
 
 var binaryTree = new BinaryTree();
-nodeArr.forEach(function(key) {
+nodeArr.forEach(function (key) {
   binaryTree.insert(key);
 });
-binaryTree.BFS(console.log);
+// console.log(binaryTree.oRoot);
+binaryTree.preOrderTraverse(console.log);
+// binaryTree.BFS(console.log);
