@@ -33,27 +33,33 @@
  * @return {TreeNode}
  */
 var buildTree = function (preorder, inorder) {
-  if (preorder.length == 0 || inorder.length == 0) {
-    return null;
-  }
-  //根据前序数组的第一个元素，就可以确定根节点
-  const root = new TreeNode(preorder[0]);
-  for (let i = 0; i < preorder.length; ++i) {
-    // 用preorder[0]去中序数组中查找对应的元素
-    if (preorder[0] == inorder[i]) {
-      // 将前序数组分成左右两半，再将中序数组分成左右两半
-      // 之后递归的处理前序数组的左边部分和中序数组的左边部分
-      // 递归处理前序数组右边部分和中序数组右边部分
-      const pre_left = preorder.slice(1, i + 1);
-      const pre_right = preorder.slice(i + 1, preorder.length);
-      const in_left = inorder.slice(0, i);
-      const in_right = inorder.slice(i + 1, inorder.length);
-      root.left = buildTree(pre_left, in_left);
-      root.right = buildTree(pre_right, in_right);
-      break;
+  return buildNNode(0, preorder.length, 0, inorder.length);
+
+  function buildNNode(preStart, preEnd, inStart, inEnd) {
+    if (preStart >= preEnd || inStart >= inEnd) {
+      return null;
     }
+    const root = new TreeNode(preorder[preStart]);
+    for (let i = inStart; i < inEnd; i++) {
+      if (inorder[i] === preorder[preStart]) {
+        const gap = i - inStart;
+        root.left = buildNNode(
+          preStart + 1,
+          preStart + gap + 1,
+          inStart,
+          inStart + gap
+        );
+        root.right = buildNNode(
+          preStart + gap + 1,
+          preEnd,
+          inStart + gap + 1,
+          inEnd
+        );
+        break;
+      }
+    }
+    return root;
   }
-  return root;
 };
 
 function TreeNode(val) {
