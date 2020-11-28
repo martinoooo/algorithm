@@ -39,16 +39,32 @@
  * @return {number[]}
  */
 var preorderTraversal = function (root) {
-  const result = [];
-  bfs(root);
-  return result;
+  // const result = [];
+  // bfs(root);
+  // return result;
 
-  function bfs(node) {
-    if (!node) return;
-    result.push(node.val);
-    bfs(node.left);
-    bfs(node.right);
+  // function bfs(node) {
+  //   if (!node) return;
+  //   result.push(node.val);
+  //   bfs(node.left);
+  //   bfs(node.right);
+  // }
+  if (!root) {
+    return [];
   }
+  const result = [];
+  const stack = [root];
+  while (stack.length) {
+    const node = stack.pop();
+    result.push(node.val);
+    if (node.right != null) {
+      stack.push(node.right);
+    }
+    if (node.left != null) {
+      stack.push(node.left);
+    }
+  }
+  return result;
 };
 
 function TreeNode(val, left, right) {

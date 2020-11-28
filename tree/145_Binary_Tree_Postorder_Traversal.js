@@ -40,16 +40,37 @@
  * @return {number[]}
  */
 var postorderTraversal = function (root) {
-  const result = [];
-  bfs(root);
-  return result;
+  // const result = [];
+  // bfs(root);
+  // return result;
 
-  function bfs(node) {
-    if (!node) return;
-    bfs(node.left);
-    bfs(node.right);
+  // function bfs(node) {
+  //   if (!node) return;
+  //   bfs(node.left);
+  //   bfs(node.right);
+  //   result.push(node.val);
+  // }
+  if (!root) {
+    return [];
+  }
+  const result = [];
+  const stack = [root];
+  const stack2 = [];
+  while (stack.length) {
+    const node = stack.pop();
+    stack2.push(node);
+    if (node.left != null) {
+      stack.push(node.left);
+    }
+    if (node.right != null) {
+      stack.push(node.right);
+    }
+  }
+  while (stack2.length) {
+    const node = stack2.pop();
     result.push(node.val);
   }
+  return result;
 };
 
 function TreeNode(val, left, right) {
