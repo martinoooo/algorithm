@@ -42,19 +42,37 @@
  * @return {number}
  */
 var minDepth = function (root) {
-  if (!root) return 0;
-  let min;
-  traverse(root, 1);
-  return min;
+  // if (!root) return 0;
+  // let min;
+  // traverse(root, 1);
+  // return min;
 
-  function traverse(node, level) {
-    if (!node) return;
-    if (!node.left && !node.right) {
-      min = min ? Math.min(min, level) : level;
+  // function traverse(node, level) {
+  //   if (!node) return;
+  //   if (!node.left && !node.right) {
+  //     min = min ? Math.min(min, level) : level;
+  //   }
+  //   traverse(node.left, level + 1);
+  //   traverse(node.right, level + 1);
+  // }
+
+  if (!root) return 0;
+  const q = [root];
+  let depth = 1;
+
+  while (q.length) {
+    const sz = q.length;
+    for (let i = 0; i < sz; i++) {
+      const cur = q.shift();
+      if (!cur.left && !cur.right) {
+        return depth;
+      }
+      if (cur.left) q.push(cur.left);
+      if (cur.right) q.push(cur.right);
     }
-    traverse(node.left, level + 1);
-    traverse(node.right, level + 1);
+    depth++;
   }
+  return depth;
 };
 
 function TreeNode(val, left, right) {
