@@ -27,7 +27,7 @@ describe("Promise", function () {
 
     it("2", function () {
       new MPromise((resolve) => {
-        let resolvedPromise = MPromise.resolve();
+        let resolvedPromise = MPromise.resolve(); // fullfilled
         resolve(resolvedPromise);
       }).then(() => {
         console.log("resolvePromise resolved");

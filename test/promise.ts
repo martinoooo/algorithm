@@ -1,5 +1,5 @@
-type resolve = (value: unknown) => void;
-type reject = (err: unknown) => void;
+type resolve = (value?: unknown) => void;
+type reject = (err?: unknown) => void;
 
 type thenFulfillExecutor = (data: any) => any | any;
 type thenRejectExecutor = (err: any) => any | any;
