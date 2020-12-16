@@ -27,48 +27,49 @@
  * @param {string} s2
  * @return {boolean}
  */
-var checkInclusion = function (s1, s2) {
-  if (s1.length > s2.length) return false;
+var checkInclusion = function (t, s) {
   const need = {};
   const window = {};
-  for (let i of s1) {
-    need[i] = (need[i] || 0) + 1;
+  for (let c of t) {
+    need[c] = need[c] ? need[c] + 1 : 1;
   }
+  const neddLenth = Object.keys(need).length;
 
   let left = 0;
   let right = 0;
-
-  while (right < s2.length) {
-    const t = s2[right];
-    window[t] = (window[t] || 0) + 1;
+  let valid = 0;
+  while (right < s.length) {
+    const c = s[right];
     right++;
+    // 进行窗口内数据的一系列更新
+    if (need[c]) {
+      window[c] = window[c] ? window[c] + 1 : 1;
+      if (window[c] === need[c]) {
+        valid++;
+      }
+    }
 
-    while (right - left > s1.length) {
-      let d = s2[left];
+    // 判断左侧窗口是否要收缩
+    while (right - left >= t.length) {
+      // 在这里判断是否找到了合法的子串
+      if (valid === neddLenth) {
+        return true;
+      }
+      const d = s[left];
       left++;
-      if (window[d] > 1) {
-        window[d]--;
-      } else {
-        delete window[d];
+      // 进行窗口内数据的一系列更新
+      if (need[d]) {
+        if (window[d] === need[d]) {
+          valid--;
+        }
+        window[d] = window[d] - 1;
       }
     }
-
-    if (objEqual(need, window)) {
-      return true;
-    }
   }
-
+  // 未找到符合条件的子串
   return false;
-
-  function objEqual(obj1, obj2) {
-    for (let k in obj1) {
-      if (obj1[k] !== obj2[k]) {
-        return false;
-      }
-    }
-    return true;
-  }
 };
 
-console.log(checkInclusion("ab", "eidbaooo"));
-console.log(checkInclusion("ab", "eidboaoo"));
+// console.log(checkInclusion("ab", "eidbaooo"));
+// console.log(checkInclusion("ab", "eidboaoo"));
+console.log(checkInclusion("abc", "ccccbbbbaaaa"));
